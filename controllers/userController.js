@@ -11,6 +11,12 @@ class UserController {
 	test(req, res) {
 		res.send("hello users");
 	}
+	async getUsers(req, res) {
+		const users = await User.findAll();
+		res.json({
+			data: users,
+		});
+	}
 	async register(req, res) {
 		console.log(req.body);
 		const { user, email, password, password2 } = req.body;
