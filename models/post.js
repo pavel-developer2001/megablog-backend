@@ -1,28 +1,25 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db");
-const Post = require("./post");
+const User = require("./user");
 
-const User = sequelize.define("users", {
+const Post = sequelize.define("posts", {
 	id: {
 		primaryKey: true,
 		autoIncrement: true,
 		allowNull: false,
 		type: Sequelize.INTEGER,
 	},
-	user: {
+	postText: {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
-	email: {
-		type: Sequelize.STRING,
+	countLike: {
+		type: Sequelize.INTEGER,
 		allowNull: false,
-	},
-	password: {
-		type: Sequelize.STRING,
-		allowNull: false,
+		defaultValue: 0,
 	},
 });
-User.hasMany(Post);
-Post.belongsTo(User);
+// Post.hasOne(User);
+// User.belongsToMany(Post);
 
-module.exports = User;
+module.exports = Post;

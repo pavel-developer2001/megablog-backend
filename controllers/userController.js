@@ -17,6 +17,27 @@ class UserController {
 			data: users,
 		});
 	}
+	async getUser(req, res) {
+		const { id } = req.params;
+		const user = await User.findOne({ where: { id: id } });
+		if (!user) {
+			res.json({ message: "Пользователь не найден" });
+		}
+		res.json({ data: user });
+	}
+	async login(req, res) {
+		const { email, password } = req.body;
+		const findUser = await User.findOne({ where: { email: email } });
+		if (!email) {
+			res.json({ message: "Email не найден" });
+		}
+		const isMatch = await bcrypt.compare(password, findUser.password);
+		if (!isMatch) {
+			res.json({ message: "Неверный пароль. Попробуйте снова" });
+		}
+		const token = generateJwt(findUser.id, findUser.user, findUser.email);
+		res.json({ token: token, data: findUser, userId: findUser.id });
+	}
 	async register(req, res) {
 		console.log(req.body);
 		const { user, email, password, password2 } = req.body;
