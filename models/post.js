@@ -9,6 +9,10 @@ const Post = sequelize.define("posts", {
 		allowNull: false,
 		type: Sequelize.INTEGER,
 	},
+	postTitle: {
+		type: Sequelize.STRING,
+		allowNull: false,
+	},
 	postText: {
 		type: Sequelize.STRING,
 		allowNull: false,
