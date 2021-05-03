@@ -16,7 +16,7 @@ class PostController {
 		res.json({ data: post });
 	}
 	async createPost(req, res) {
-		const { postTitle, postText } = req.body;
+		const { postTitle, postText, userId } = req.body;
 		// console.log(req.user);
 		if (postTitle == "") {
 			res.json({ message: "Напишите заголовок" });
@@ -24,7 +24,7 @@ class PostController {
 		const newPost = await Post.create({
 			postTitle: postTitle,
 			postText: postText,
-			userId: 78,
+			userId: userId,
 		});
 		res.json({ data: newPost });
 	}
