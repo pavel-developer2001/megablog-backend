@@ -26,6 +26,7 @@ class PostController {
 			postText: postText,
 			userId: userId,
 		});
+		await newPost.save();
 		res.json({ data: newPost });
 	}
 }
